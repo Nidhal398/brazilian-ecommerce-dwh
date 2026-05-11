@@ -33,6 +33,26 @@ into PostgreSQL for analytical querying.
 ```
 
 ---
+## 📸 Screenshots
+
+### Star schema
+![Star Schema](screenshots/schema_etoile.png)
+
+### Master job — DWH orchestration
+![Master Job DWH](screenshots/mster_job_dwh.png)
+
+### Master job — Staging area
+![Master Job SA](screenshots/master_job_sa.png)
+
+### Fact table ETL (fait_ventes)
+![Fait Ventes](screenshots/fait_ventes.png)
+
+### Dimension jobs
+![Dim Client](screenshots/dim_client.png)
+![Dim Products](screenshots/dim_products.png)
+![Dim Vendeur](screenshots/dim_vendeur.png)
+![Dim Date](screenshots/dim_date.png)
+---
 
 ## 🔧 Tech stack
 

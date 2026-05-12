@@ -122,7 +122,6 @@ LIMIT  5;
 ![Page 4](screenshots/page4_vendeurs.png)
 ## 🗺️ What's next
 
-
 - [ ] Airflow orchestration to replace master_job
 - [ ] Docker-compose for reproducible local setup
 

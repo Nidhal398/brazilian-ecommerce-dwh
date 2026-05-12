@@ -107,10 +107,22 @@ LIMIT  5;
 ```
 
 ---
+## 📊 Power BI Dashboard
 
+4-page interactive dashboard built on top of the DWH:
+
+- **Page 1** — KPIs: Total Revenue (R$20M), Orders (113K), Avg Order Value
+- **Page 2** — Geographic distribution across Brazilian states
+- **Page 3** — Product categories analysis (bar chart + treemap)
+- **Page 4** — Sellers performance by state
+
+![Page 1](screenshots/page1_vue_generale.png)
+![Page 2](screenshots/page2_geographie.png)
+![Page 3](screenshots/page3_produits.png)
+![Page 4](screenshots/page4_vendeurs.png)
 ## 🗺️ What's next
 
-- [ ] Power BI dashboard (KPIs: revenue by region, category, month)
+
 - [ ] Airflow orchestration to replace master_job
 - [ ] Docker-compose for reproducible local setup
 

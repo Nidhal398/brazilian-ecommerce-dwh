@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<talendfile:ContextType xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:talendfile="platform:/resource/org.talend.model/model/TalendFile.xsd" xmi:id="_EiI0kE45EfGPb8ruhu4bCg" confirmationNeeded="false" name="Default">
+  <contextParameter xmi:id="_EiJboE45EfGPb8ruhu4bCg" comment="" name="DB_HOST" prompt="DB_HOST?" promptNeeded="true" repositoryContextId="built-in" type="id_String" value="localhost"/>
+  <contextParameter xmi:id="_EiJboU45EfGPb8ruhu4bCg" comment="" name="DB_PORT" prompt="DB_PORT?" promptNeeded="true" repositoryContextId="built-in" type="id_String" value="5432"/>
+  <contextParameter xmi:id="_EiJbok45EfGPb8ruhu4bCg" comment="" name="DB_NAME" prompt="DB_NAME?" promptNeeded="true" repositoryContextId="built-in" type="id_String" value="SA"/>
+  <contextParameter xmi:id="_EiJbo045EfGPb8ruhu4bCg" comment="" name="DB_USER" prompt="DB_USER?" promptNeeded="true" repositoryContextId="built-in" type="id_String" value="postgres"/>
+  <contextParameter xmi:id="_EiJbpE45EfGPb8ruhu4bCg" comment="" name="DB_PASSWORD" prompt="DB_PASSWORD?" promptNeeded="true" repositoryContextId="built-in" type="id_String" value="nidhal"/>
+  <contextParameter xmi:id="_BGCyEE5CEfGPb8ruhu4bCg" comment="" name="DB_NAME_DW" prompt="DB_NAME_DW?" promptNeeded="false" repositoryContextId="built-in" type="id_String" value="olist_dw"/>
+</talendfile:ContextType>

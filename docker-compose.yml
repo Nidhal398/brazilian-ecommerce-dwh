@@ -1,0 +1,90 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: olist_postgres
+    environment:
+      POSTGRES_DB: airflow_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nidhal
+      POSTGRES_MULTIPLE_DATABASES: airflow_db,olist_dw
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d airflow_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  airflow-init:
+    build: .                          # utilise notre Dockerfile custom
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:nidhal@postgres:5432/airflow_db
+      AIRFLOW__WEBSERVER__SECRET_KEY: "olist_secret_key_2024"
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+      GITHUB_REPO: "${GITHUB_REPO}"
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - |
+        airflow db migrate &&
+        airflow users create --username admin --password admin --firstname Nidhal --lastname Admin --role Admin --email admin@example.com
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./talend/jobs:/opt/talend/jobs   # mount des jobs Talend
+
+  airflow-webserver:
+    build: .
+    container_name: olist_airflow_web
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:nidhal@olist_postgres:5432/airflow_db
+      AIRFLOW__WEBSERVER__SECRET_KEY: "olist_secret_key_2024"
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+      GITHUB_REPO: "${GITHUB_REPO}"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./talend/jobs:/opt/talend/jobs
+      - airflow_logs:/opt/airflow/logs
+    command: ["airflow", "webserver"]
+    restart: unless-stopped
+
+  airflow-scheduler:
+    build: .
+    container_name: olist_airflow_scheduler
+    depends_on:
+      postgres:
+        condition: service_healthy
+      airflow-init:
+        condition: service_completed_successfully
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://postgres:nidhal@postgres:5432/airflow_db
+      AIRFLOW__WEBSERVER__SECRET_KEY: "olist_secret_key_2024"
+      GITHUB_TOKEN: "${GITHUB_TOKEN}"
+      GITHUB_REPO: "${GITHUB_REPO}"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./talend/jobs:/opt/talend/jobs
+      - airflow_logs:/opt/airflow/logs
+    command: ["airflow", "scheduler"]
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  airflow_logs:

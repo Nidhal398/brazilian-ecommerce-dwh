@@ -1,0 +1,3 @@
+%~d0
+cd %~dp0
+java -Dtalend.component.manager.m2.repository="%cd%/../lib" -Xms256M -Xmx1024M -cp .;../lib/routines.jar;../lib/log4j-slf4j-impl-2.13.2.jar;../lib/log4j-api-2.13.2.jar;../lib/log4j-core-2.13.2.jar;../lib/log4j-1.2-api-2.13.2.jar;../lib/commons-collections-3.2.2.jar;../lib/jboss-marshalling-river-2.0.12.Final.jar;../lib/jboss-marshalling-2.0.12.Final.jar;../lib/advancedPersistentLookupLib-1.3.jar;../lib/dom4j-2.1.3.jar;../lib/slf4j-api-1.7.29.jar;../lib/postgresql-42.2.14.jar;../lib/trove.jar;../lib/crypto-utils-0.31.12.jar;master_job_dwh_0_1.jar;fait_vente_0_1.jar;dim_date_0_1.jar;dim_client_0_1.jar;dim_product_0_1.jar;dim_vendeur_0_1.jar; myfirstproject.master_job_dwh_0_1.master_job_dwh --context=Default %*
